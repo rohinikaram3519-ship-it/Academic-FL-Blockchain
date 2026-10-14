@@ -1,0 +1,7 @@
+{
+  "dataset": "OULAD",
+  "clients": 7,
+  "rounds": 3,
+  "accuracy": 21.82,
+  "loss": 2.04
+}

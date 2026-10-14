@@ -1,0 +1,52 @@
+[
+  {
+    "studentId": 11391,
+    "module": "AAA",
+    "status": "Eligible"
+  },
+  {
+    "studentId": 28400,
+    "module": "AAA",
+    "status": "Eligible"
+  },
+  {
+    "studentId": 30268,
+    "module": "AAA",
+    "status": "Not Eligible"
+  },
+  {
+    "studentId": 46704,
+    "module": "BBB",
+    "status": "Eligible"
+  },
+  {
+    "studentId": 52444,
+    "module": "BBB",
+    "status": "Eligible"
+  },
+  {
+    "studentId": 61756,
+    "module": "CCC",
+    "status": "Not Eligible"
+  },
+  {
+    "studentId": 70123,
+    "module": "DDD",
+    "status": "Eligible"
+  },
+  {
+    "studentId": 81245,
+    "module": "EEE",
+    "status": "Eligible"
+  },
+  {
+    "studentId": 92367,
+    "module": "FFF",
+    "status": "Not Eligible"
+  },
+  {
+    "studentId": 103578,
+    "module": "GGG",
+    "status": "Eligible"
+  }
+]
