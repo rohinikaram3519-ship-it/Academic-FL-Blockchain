@@ -225,6 +225,8 @@ tr:hover {
   color:#15803d;
 
   text-align:center;
+
+  font-weight: bold;
 }
 
 .invalid{
@@ -236,3 +238,31 @@ tr:hover {
   font-weight:bold;
 }
 
+.result-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.student-info {
+  flex: 1;
+}
+
+.student-info p {
+  margin: 12px 0;
+}
+
+.pdf-preview {
+  flex: 1;
+}
+
+.pdf-box {
+  width: 100%;
+  height: 350px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}

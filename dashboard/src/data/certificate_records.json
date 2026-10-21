@@ -1,51 +1,81 @@
 [
   {
     "studentId": 11391,
+    "studentName": "Shivam Kumar",
+    "university": "Open University",
+    "issueDate": "10-10-2024",
     "module": "AAA",
     "status": "Eligible"
   },
   {
     "studentId": 28400,
+    "studentName": "Jiya Sharma",
+    "university": "Open University",
+    "issueDate": "10-04-2024",
     "module": "AAA",
     "status": "Eligible"
   },
   {
     "studentId": 30268,
+    "studentName": "Riya Singh",
+    "university": "Open University",
+    "issueDate": "08-05-2022",
     "module": "AAA",
     "status": "Not Eligible"
   },
   {
     "studentId": 46704,
+    "studentName": "Nikhil Verma",
+    "university": "Open University",
+    "issueDate": "15-05-2021",
     "module": "BBB",
     "status": "Eligible"
   },
   {
     "studentId": 52444,
+    "studentName": "Savi Singh",
+    "university": "Open University",
+    "issueDate": "18-06-2020",
     "module": "BBB",
     "status": "Eligible"
   },
   {
     "studentId": 61756,
+    "studentName": "John Doe",
+    "university": "Open University",
+    "issueDate": "19-08-2022",
     "module": "CCC",
     "status": "Not Eligible"
   },
   {
     "studentId": 70123,
+    "studentName": "Jane Smith",
+    "university": "Open University",
+    "issueDate": "08-09-2020",
     "module": "DDD",
     "status": "Eligible"
   },
   {
     "studentId": 81245,
+    "studentName": "Abhi Jain",
+    "university": "Open University",
+    "issueDate": "13-09-2023",
     "module": "EEE",
     "status": "Eligible"
   },
   {
     "studentId": 92367,
+    "studentName": "Lily Kapoor",
+    "university": "Open University",
+    "issueDate": "13-08-2022",
     "module": "FFF",
     "status": "Not Eligible"
   },
   {
     "studentId": 103578,
+    "studentName": "Anju Joshi",
+    "university": "Open University",
+    "issueDate": "06-07-2021",
     "module": "GGG",
     "status": "Eligible"
   }

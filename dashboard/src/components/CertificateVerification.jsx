@@ -102,54 +102,54 @@ export default function CertificateVerification({
 
       {result && (
 
-        <div className="verify-result">
+        <div className="result-container">
+          <div className="student-info">
 
           <h3>
             Student Record Found
           </h3>
 
-          <div className="info-row">
-            <strong>Student ID:</strong>
-            {result.studentId}
-          </div>
+           <p><strong>Student ID:</strong> {result.studentId}</p>
 
-          <div className="info-row">
-            <strong>Module:</strong>
-            {result.module}
-          </div>
+    <p><strong>Student Name:</strong> {result.studentName}</p>
 
-          <div className="info-row">
-            <strong>University:</strong>
-            Open University
-          </div>
+    <p><strong>University:</strong> {result.university}</p>
 
-          <div className="info-row">
-            <strong>Certificate:</strong>
-            {result.status}
-          </div>
+    <p><strong>Issue Date:</strong> {result.issueDate}</p>
 
-          <div className="info-row">
-            <strong>Blockchain:</strong>
-            Verified
-          </div>
+    <p><strong>Certificate:</strong> {result.status}</p>
 
-          <div className="info-row">
-            <strong>Attestation:</strong>
-            Verified
-          </div>
+         </div> 
+          <div className="pdf-preview">
 
-          <div className="info-row">
-            <strong>Signature:</strong>
-            Valid
-          </div>
+          <h3>Uploaded Certificate</h3>
 
+           <div className="pdf-box">
+
+            {selectedFile ? (
+           <iframe
+            src={URL.createObjectURL(selectedFile)}
+            title="PDF Preview"
+            width="100%"
+            height="100%"
+            style={{
+            border: "none"
+            }}
+           />
+          ) : (
+          <p>No PDF Uploaded</p>
+          )}
+          </div>
+          
           <hr />
-
+          
           <h2 className="valid">
             CERTIFICATE IS VALID
           </h2>
 
         </div>
+        </div>
+
 
       )}
 
