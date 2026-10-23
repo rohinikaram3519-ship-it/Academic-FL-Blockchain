@@ -266,3 +266,73 @@ tr:hover {
   border-radius: 10px;
   overflow: hidden;
 }
+
+.login-container {
+
+  height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background:
+  linear-gradient(
+  135deg,
+  #2f6e7e,
+  #9e8343
+  );
+}
+
+.login-card {
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 15px;
+
+  width: 400px;
+
+  text-align: center;
+
+  box-shadow:
+  0 4px 20px
+  rgba(0,0,0,0.2);
+}
+
+.login-card input {
+
+  width: 100%;
+
+  padding: 12px;
+
+  margin: 10px 0;
+
+  border: 1px solid #ccc;
+
+  border-radius: 8px;
+}
+
+.login-card button {
+
+  width: 100%;
+
+  padding: 12px;
+
+  background: #2563eb;
+
+  color: white;
+
+  border: none;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.login-card button:hover {
+
+  background: #1d4ed8;
+}

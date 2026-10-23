@@ -18,12 +18,18 @@ export default function Login({ onLogin }) {
   };
 
   return (
+    
+    <div className="login-container">
 
     <div className="login-card">
 
-      <h1>
+      <h2>
         Academic Certificate Verification
-      </h1>
+      </h2>
+      
+      <h3>
+          Login Portal
+      </h3>
 
       <input
         type="text"
@@ -47,6 +53,7 @@ export default function Login({ onLogin }) {
         Login
       </button>
 
+    </div>
     </div>
   );
 }

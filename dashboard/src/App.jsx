@@ -9,9 +9,23 @@ import records from "./data/certificate_records.json";
 import VerificationTable from "./components/VerificationTable";
 import StatCard from "./components/StatCard";
 import CertificateVerification from "./components/CertificateVerification";
+import Login from "./components/Login";
 
 function App() {
   const [history, setHistory] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
+  if (!loggedIn) {
+
+  return (
+
+    <Login
+      onLogin={() =>
+        setLoggedIn(true)
+      }
+    />
+
+  );
+  }
   return (
     <div className="dashboard">
 

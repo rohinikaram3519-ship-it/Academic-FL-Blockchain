@@ -12,7 +12,7 @@ export default function CertificateVerification({
 
   
 
- const verifyCertificate = () => {
+ const verifyCertificate = async () => {
 
   if (!selectedFile) {
 
@@ -23,13 +23,31 @@ export default function CertificateVerification({
     return;
   }
 
-  const filename =
-    selectedFile.name;
+  
+  const formData =
+    new FormData();
+
+  formData.append(
+    "file",
+    selectedFile
+  );
+
+  const response =
+    await fetch(
+      "http://127.0.0.1:5000/extract",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+  const data =
+    await response.json();  
+
+  console.log(data);  
 
   const studentId =
-    filename
-      .replace("CERT_", "")
-      .replace(".pdf", "");
+    data.studentId;
 
   const student =
     records.find(
