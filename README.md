@@ -10,6 +10,8 @@ through blockchain storage, attestation tokens, and cryptographic verification.
 
 
 **Objectives**
+
+
 Preserve student data privacy using Federated Learning.
 Predict certificate eligibility from academic records.
 Secure academic verification records using SHA-256 hashes.
@@ -22,12 +24,16 @@ Verify academic certificates through a web dashboard.
 
 
 **Federated Learning Module**
+
+
 Framework - Flower Framework
             PyTorch
 Aggregation Algorithm - FedAvg(Federated Averaging)
 
 
 **Blockchain Module**
+
+
 Technologies - Ethereum
                Ganache
                Truffle
@@ -38,14 +44,20 @@ Blockchain Storage
 
 
 **Security Layer**
+
+
 SHA-256 Verification Hash : Used to generate a unique fingerprint for each academic record.
 Attestation Token : Generated from academic verification records for remote attestation.
 
 
 **Remote Attestation Module**
+
+
 Remote Attestation verifies that academic records stored on blockchain have not been modified.
 
 **Project Structure**
+
+
 
 OULAD Dataset
         ↓
