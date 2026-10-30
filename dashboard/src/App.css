@@ -269,7 +269,9 @@ tr:hover {
 
 .login-container {
 
-  height: 100vh;
+  width: 100vw;
+
+  min-height: 100vh;
 
   display: flex;
 
@@ -283,6 +285,7 @@ tr:hover {
   #2f6e7e,
   #9e8343
   );
+  margin: 0;
 }
 
 .login-card {

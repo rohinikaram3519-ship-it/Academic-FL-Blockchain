@@ -1,0 +1,65 @@
+[
+  {
+    "username": "11391",
+    "password": "11391",
+    "studentId": "11391",
+    "studentName": "Shivam Kumar",
+    "role": "student"
+  },
+  {
+    "username": "28400",
+    "password": "28400",
+    "studentId": "28400",
+    "studentName": "Ravi Kumar",
+    "role": "student"
+  },
+  {
+    "username": "30268",
+    "password": "30268",
+    "studentId": "30268",
+    "studentName": "Priya Sharma",
+    "role": "student"
+  },
+  {
+    "username": "31604",
+    "password": "31604",
+    "studentId": "31604",
+    "studentName": "Amit Singh",
+    "role": "student"
+  },
+  {
+    "username": "33885",
+    "password": "33885",
+    "studentId": "33885",
+    "studentName": "Rajesh Kumar",
+    "role": "student"
+  },
+  {
+    "username": "38053",
+    "password": "38053",
+    "studentId": "38053",
+    "studentName": "Suresh Patel",
+    "role": "student"
+  },
+  {
+    "username": "45462",
+    "password": "45462",
+    "studentId": "45462",
+    "studentName": "Anita Gupta",
+    "role": "student"
+  },
+  {
+    "username": "52130",
+    "password": "52130",
+    "studentId": "52130",
+    "studentName": "Rahul Mehta",
+    "role": "student"
+  },
+  {
+    "username": "53025",
+    "password": "53025",
+    "studentId": "53025",
+    "studentName": "Rajesh Kumar",
+    "role": "student"
+  }
+]

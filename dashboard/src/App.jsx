@@ -10,18 +10,34 @@ import VerificationTable from "./components/VerificationTable";
 import StatCard from "./components/StatCard";
 import CertificateVerification from "./components/CertificateVerification";
 import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   const [history, setHistory] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
-  if (!loggedIn) {
+  const [user, setUser] = useState(null);
+  const [showRegister, setShowRegister] = useState(false);
+  if (showRegister) {
+
+  return (
+
+    <Register
+      onBack={() =>
+        setShowRegister(false)
+      }
+    />
+
+  );
+  }
+
+  if (!user) {
 
   return (
 
     <Login
-      onLogin={() =>
-        setLoggedIn(true)
-      }
+       onLogin={setUser}
+       onRegister={() =>
+        setShowRegister(true)
+     }
     />
 
   );
@@ -34,7 +50,12 @@ function App() {
                Academic Certificate Verification
            </h1>
      </header>
+     
+     <h2>
 
+      Welcome  {user.studentName}
+
+     </h2>
     <div className="table-section">
 
      <VerificationTable history={history} />
@@ -46,6 +67,7 @@ function App() {
      <CertificateVerification
         history={history}
         setHistory={setHistory}
+        user={user}
       />
 
     </div>

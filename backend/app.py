@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from pdf2image import convert_from_bytes
+import pytesseract
+
 import PyPDF2
 import re
 
@@ -28,29 +31,33 @@ def extract_student():
 
     file = request.files["file"]
 
-    reader = PyPDF2.PdfReader(file)
+    pages = convert_from_bytes(
+        file.read()
+  )
 
     text = ""
 
-    for page in reader.pages:
+    for page in pages:
 
-        page_text = page.extract_text()
-
-        if page_text:
-
-            text += page_text
-
-    match = re.search(
-        r"Student ID\s*:\s*(\d+)",
-        text
+       text += pytesseract.image_to_string(
+          page
     )
 
-    if match:
+    print(text)
+
+    numbers = re.findall( r"\d{5,}", text)
+    
+    print(
+    "NUMBERS FOUND:",
+    numbers
+)
+
+    if numbers:
 
         return jsonify(
             {
                 "studentId":
-                match.group(1)
+                numbers[0]
             }
         )
 

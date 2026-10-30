@@ -1,21 +1,38 @@
 import { useState } from "react";
+import users from "../data/users.json";
 
-export default function Login({ onLogin }) {
+
+export default function Login({ onLogin, onRegister }) {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
 
-    if (
-      username === "admin" &&
-      password === "1234"
-    ) {
-      onLogin();
-    } else {
-      alert("Invalid Login");
-    }
-  };
+  const user = users.find(
+
+    u =>
+
+    u.username === username &&
+
+    u.password === password
+
+  );
+
+  if(user){
+
+    onLogin(user);
+
+  }
+  else{
+
+    alert(
+      "Invalid Credentials"
+    );
+  }
+
+};
+
 
   return (
     
@@ -52,6 +69,22 @@ export default function Login({ onLogin }) {
       <button onClick={handleLogin}>
         Login
       </button>
+
+      <p>
+
+        Don't have an account?
+
+      </p>
+
+      <button
+        onClick={() =>
+        onRegister()
+       }
+      >
+
+     Create Account
+
+     </button>
 
     </div>
     </div>

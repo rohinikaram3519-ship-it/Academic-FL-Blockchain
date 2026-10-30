@@ -3,7 +3,8 @@ import records from "../data/certificate_records.json";
 
 export default function CertificateVerification({
   history,
-  setHistory
+  setHistory,
+  user
 }) {
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -42,22 +43,38 @@ export default function CertificateVerification({
     );
 
   const data =
-    await response.json();  
+  await response.json();
 
-  console.log(data);  
+  console.log("Flask Response:", data);
 
   const studentId =
-    data.studentId;
+      data.studentId
+      ?.toString()
+       .trim();
 
-  const student =
-    records.find(
-
-      (record) =>
-
-      record.studentId
-      .toString() === studentId
-
+  console.log(
+     "Extracted Student ID:",
+     studentId
     );
+   
+
+
+    const student =
+  records.find(
+    (record) =>
+      record.studentId
+        .toString()
+        .trim()
+      ===
+      studentId
+  );
+
+console.log(
+  "Matched Student:",
+  student
+);
+
+ 
 
   if (student) {
 
