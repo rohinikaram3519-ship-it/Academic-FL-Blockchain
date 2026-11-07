@@ -25,7 +25,7 @@ abi = contract_interface["abi"]
 
 
 contract_address = Web3.to_checksum_address(
-    "0x1bfC23e06e264d74487206D628D5ce586e7e6d7b"
+    "0xb162dAEDec42Bd76b58c9e3aDa8A7C39325Ecb43"
 )
 
 contract = w3.eth.contract(

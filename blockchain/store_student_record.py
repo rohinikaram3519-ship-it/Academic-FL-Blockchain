@@ -11,7 +11,7 @@ w3 = Web3(
 
 # Your deployed contract address
 
-contract_address = "0x0Fc5c29480f4E5894dA7e23678c5eB10Ff38E773"
+contract_address = "0x4D343fb8DfaAb94bf4a0ee8068fc14d0f61b00ec"
 
 # Load ABI
 

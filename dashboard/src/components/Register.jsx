@@ -13,13 +13,55 @@ export default function Register({
   const [password, setPassword] =
     useState("");
 
-  const handleRegister = () => {
+  const [blockchainData,setBlockchainData] = useState(null);
 
-    alert(
-      "Account Created Successfully"
+  const handleRegister = async() => {
+    console.log("Register button clicked");
+
+   const response = await fetch(
+      "http://127.0.0.1:5000/register",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+
+        body: JSON.stringify({
+
+          studentId,
+
+          studentName,
+
+          password
+
+        })
+
+      }
     );
 
-    onBack();
+    const data =
+      await response.json();
+
+      console.log(
+        "Registration Response:",
+        data
+      );
+
+    setBlockchainData(data);  
+
+    console.log(
+      "Blockchain Data:",
+      data);
+
+    alert(
+   "Account Created Successfully!"
+  );
+
+   //setTimeout(() => {
+   //onBack();
+//}, 2000);
 
   };
 
@@ -69,6 +111,47 @@ export default function Register({
         >
           Register
         </button>
+
+        {blockchainData !== null && (
+
+       <div className="node-card">
+
+       <h3>
+        Blockchain Identity Created
+       </h3>
+       
+
+       <p>
+
+          Student ID:
+          {blockchainData.studentId}
+
+       </p>
+
+       <p>
+
+        Node ID:
+        {blockchainData.nodeId}
+
+       </p>
+
+       <p>
+
+       Wallet Address:
+      {blockchainData.walletAddress}
+
+      </p>
+
+      <p>
+
+       Status:
+       ✅ {blockchainData.status}
+
+      </p>
+
+      </div>
+   )}
+
 
       </div>
 

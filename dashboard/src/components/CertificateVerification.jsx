@@ -60,7 +60,7 @@ export default function CertificateVerification({
 
 
     const student =
-  records.find(
+    records.find(
     (record) =>
       record.studentId
         .toString()
@@ -192,8 +192,8 @@ console.log(
 
         <div className="invalid">
 
-          Student ID Not Found
-
+          Certificate is Invalid
+          
         </div>
 
       )}
