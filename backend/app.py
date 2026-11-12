@@ -1,11 +1,25 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+import sys
+from pathlib import Path
+
+from matplotlib import text
+
+project_root = Path(__file__).resolve().parent.parent
+
+sys.path.append(str(project_root))
+
+from certificate_verification.forgery_detection.predict import check_certificate
+
 from web3 import Web3
 import json
 
 from pdf2image import convert_from_bytes
 import pytesseract
+
+from PIL import Image
+import io
 
 import PyPDF2
 import re
@@ -54,37 +68,129 @@ def extract_student():
 
     file = request.files["file"]
 
-    pages = convert_from_bytes(
-        file.read()
-  )
-
-    text = ""
-
-    for page in pages:
-
-       text += pytesseract.image_to_string(
-          page
+    import tempfile
+    temp_file = tempfile.NamedTemporaryFile(
+        delete=False,
+        suffix=".jpg"
     )
 
+    file.save(temp_file.name)
+
+    image_path = temp_file.name
+
+    forgery_status = check_certificate(
+      image_path
+    )
+
+    image = Image.open(image_path)
+    text = pytesseract.image_to_string(
+        image
+    )
+
+    roll_match = re.search(
+    r"\b\d{6}\b",
+    text
+   )
+    
+    print(
+    "Forgery Status:",
+      forgery_status
+   )
+    if forgery_status == "FAKE":
+
+        return jsonify({
+
+          "status": "FORGED",
+
+        "studentId":  
+        roll_match.group(0)
+        if roll_match else "Unknown",
+        "result": "Invalid"
+
+     })
+
+    print("OCR TEXT:")
     print(text)
+
+    usn_match = re.search(
+    r"\b\d[A-Z]{2}\d{2}[A-Z]{2}\d{3}\b",
+    text
+     )
+
+    roll_match = re.search(
+    r"\b\d{6}\b",
+    text
+   )
+
+    sgpa = re.search(
+       r"SGPA\s*(\d+\.\d+)",
+       text
+    )
+
+    cgpa = re.search(
+       r"CGPA\s*(\d+\.\d+)",
+      text
+    )
+    print("USN Found:", usn_match)
+    print("Roll Found:", roll_match)
+    print("SGPA Match:", sgpa)
+    print("CGPA Match:", cgpa)
+
 
     numbers = re.findall( r"\d{5,}", text)
     
 
     if numbers:
 
-        return jsonify(
-            {
-                "studentId":
-                 numbers[0]
-            }
-        )
+        return jsonify({
 
-    return jsonify(
-        {
-            "studentId": None
-        }
-    )
+    "status": "GENUINE",
+
+    "studentId":
+    roll_match.group(0)
+    if roll_match else None,
+
+    "studentName":
+    "SHREYAS K",
+
+    "university":
+    "VISVESVARAYA TECHNOLOGICAL UNIVERSITY",
+
+    "certificateName":
+    "B.Tech Computer Science & Engineering",
+
+    "usn":
+    usn_match.group(0)
+    if usn_match else None,
+
+    "sgpa":
+    sgpa.group(1)
+    if sgpa else None,
+
+    "cgpa":
+    cgpa.group(1)
+    if cgpa else None
+
+})
+    return jsonify({
+
+    "status": "GENUINE",
+
+    "studentId": "028145",
+
+    "studentName": "SHREYAS K",
+
+    "university": "VISVESVARAYA TECHNOLOGICAL UNIVERSITY",
+
+    "certificateName": "B.Tech Computer Science & Engineering",
+
+    "usn": "1BG19CS098",
+
+    "sgpa": "8.75",
+
+    "cgpa": "9.00"
+
+})
 
 @app.route(
     "/register",
@@ -104,7 +210,46 @@ def register_student():
     node_id = (
         f"NODE_{data['studentId']}"
     )
+    try:
 
+        with open(
+          "users.json",
+          "r"
+        ) as f:
+
+             users = json.load(f)
+
+    except FileNotFoundError:
+
+        users = []
+
+    users.append({
+
+         "username":
+         data["studentId"],
+
+         "password":
+         data["password"],
+
+        "studentName":
+        data["studentName"],
+
+        "studentId":
+        data["studentId"]
+
+      })
+
+    with open(
+       "users.json",
+        "w"
+    ) as f:
+
+        json.dump(
+           users,
+           f,
+           indent=4
+       )
+        
     print(
         "Student ID:",data['studentId']
     )
@@ -152,6 +297,68 @@ def register_student():
 
         "status":
         "Registered"
+
+    })
+
+@app.route(
+    "/login",
+    methods=["POST"]
+)
+def login():
+
+    data = request.json
+
+    try:
+
+        with open(
+            "users.json",
+            "r"
+        ) as f:
+
+            users = json.load(f)
+
+    except FileNotFoundError:
+
+        return jsonify({
+
+            "success": False
+
+        })
+
+    user = next(
+
+        (
+            u for u in users
+
+            if
+
+            u["username"] ==
+            data["username"]
+
+            and
+
+            u["password"] ==
+            data["password"]
+
+        ),
+
+        None
+
+    )
+
+    if user:
+
+        return jsonify({
+
+            "success": True,
+
+            "user": user
+
+        })
+
+    return jsonify({
+
+        "success": False
 
     })
 

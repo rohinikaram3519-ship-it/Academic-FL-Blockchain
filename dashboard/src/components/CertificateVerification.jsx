@@ -45,6 +45,48 @@ export default function CertificateVerification({
   const data =
   await response.json();
 
+  if (
+  data.status ===
+  "FORGED"
+) {
+
+  setResult({
+    studentId:
+      data.studentId || "Unknown",
+
+    status:
+      "FORGED",
+
+    result:
+      "INVALID"
+  });
+
+  setHistory((prev) => [
+    ...prev,
+    {
+      studentId:
+        data.studentId || "Unknown",
+
+      status: "FORGED",
+
+      verification: "Invalid"
+    }
+  ]);
+
+  return;
+}
+
+  if (
+  data.status ===
+  "GENUINE"
+) {
+
+  console.log(
+    "✅ Genuine Certificate"
+  );
+
+} 
+
   console.log("Flask Response:", data);
 
   const studentId =
@@ -59,52 +101,32 @@ export default function CertificateVerification({
    
 
 
-    const student =
-    records.find(
-    (record) =>
-      record.studentId
-        .toString()
-        .trim()
-      ===
-      studentId
-  );
+    if (
+  data.status === "GENUINE"
+) {
 
-console.log(
-  "Matched Student:",
-  student
-);
-
- 
-
-  if (student) {
-
-  setResult(student);
+  setResult(data);
 
   setHistory((prev) => [
     ...prev,
     {
-      studentId: student.studentId,
-      module: student.module,
-      status: student.status,
-      verification: "Verified"
-    }
-  ]);
+      studentId:
+        data.studentId || "-",
 
-} else {
-
-  setResult(false);
-
-  setHistory((prev) => [
-    ...prev,
-    {
-      studentId: studentId,
       module: "-",
-      status: "-",
-      verification: "Invalid"
+
+      status:
+      "GENUINE",
+
+      verification:
+      "Verified"
     }
   ]);
 
+  return;
 }
+
+setResult(false);
 
 };
 
@@ -120,7 +142,7 @@ console.log(
 
       <input
         type="file"
-        accept=".pdf"
+        accept=".pdf,.jpg,.jpeg,.png"
         onChange={(e) =>
           setSelectedFile(
             e.target.files[0]
@@ -135,24 +157,67 @@ console.log(
       </button>
 
 
-      {result && (
+      {result && result.status !== "FORGED" &&  (
 
         <div className="result-container">
           <div className="student-info">
 
           <h3>
-            Student Record Found
+            Certificate Analysis
           </h3>
 
-           <p><strong>Student ID:</strong> {result.studentId}</p>
+          <p>
+  <strong>
+    Forgery Status:
+  </strong>
+  ✅ Genuine
+</p>
 
-    <p><strong>Student Name:</strong> {result.studentName}</p>
+<p>
+  <strong>
+    Student ID:
+  </strong>
+  {result.studentId}
+</p>
 
-    <p><strong>University:</strong> {result.university}</p>
+<p>
+  <strong>
+    Student Name:
+  </strong>
+  {result.studentName}
+</p>
 
-    <p><strong>Issue Date:</strong> {result.issueDate}</p>
+<p>
+  <strong>University:</strong>{" "}
+  {result.university}
+</p>
 
-    <p><strong>Certificate:</strong> {result.status}</p>
+<p>
+  <strong>Certificate:</strong>{" "}
+  {result.certificateName}
+</p>
+
+
+<p>
+  <strong>
+    USN:
+  </strong>
+  {result.usn}
+</p>
+
+<p>
+  <strong>
+    SGPA:
+  </strong>
+  {result.sgpa}
+</p>
+
+<p>
+  <strong>
+    CGPA:
+  </strong>
+  {result.cgpa}
+</p>
 
          </div> 
           <div className="pdf-preview">
@@ -162,6 +227,22 @@ console.log(
            <div className="pdf-box">
 
             {selectedFile ? (
+
+              selectedFile.type.includes("image")
+
+              ? (
+
+               <img
+                 src={URL.createObjectURL(selectedFile)}
+                 alt="Certificate Preview"
+                style={{
+                  width: "100%",
+                 height: "100%",
+                objectFit: "contain"
+              }}
+             />
+
+           ) : (
            <iframe
             src={URL.createObjectURL(selectedFile)}
             title="PDF Preview"
@@ -171,6 +252,7 @@ console.log(
             border: "none"
             }}
            />
+          )
           ) : (
           <p>No PDF Uploaded</p>
           )}
@@ -188,15 +270,32 @@ console.log(
 
       )}
 
-      {result === false && (
+      {result && result.status === "FORGED" && (
 
-        <div className="invalid">
+  <div className="invalid">
 
-          Certificate is Invalid
-          
-        </div>
+    <h3>
+      Forged Certificate Detected
+    </h3>
 
-      )}
+    <p>
+      <strong>Student ID:</strong>{" "}
+      {result.studentId}
+    </p>
+
+    <p>
+      <strong>Status:</strong>{" "}
+     {result.status}
+    </p>
+
+    <p>
+      <strong>Result:</strong>{" "}
+      {result.result}
+    </p>
+
+  </div>
+
+)}
 
     </div>
   );

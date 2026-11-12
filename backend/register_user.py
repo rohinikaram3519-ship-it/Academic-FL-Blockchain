@@ -1,8 +1,11 @@
 from web3 import Web3
 import json
-import uuid
 
-def create_identity(student_id):
+def create_identity(
+    student_id,
+    student_name,
+    password
+):
 
     account = Web3().eth.account.create()
 
@@ -10,7 +13,54 @@ def create_identity(student_id):
 
     node_id = f"NODE_{student_id}"
 
+    try:
+
+        with open(
+            "users.json",
+            "r"
+        ) as f:
+
+            users = json.load(f)
+
+    except FileNotFoundError:
+
+        users = []
+
+    users.append({
+
+        "username":
+        str(student_id),
+
+        "password":
+        password,
+
+        "studentName":
+        student_name
+
+    })
+
+    with open(
+        "users.json",
+        "w"
+    ) as f:
+
+        json.dump(
+            users,
+            f,
+            indent=4
+        )
+
+    print(
+        "Student ID:",
+        student_id
+    )
+
     return {
-        "nodeId": node_id,
-        "walletAddress": wallet_address
+
+        "nodeId":
+        node_id,
+
+        "walletAddress":
+        wallet_address
+
     }

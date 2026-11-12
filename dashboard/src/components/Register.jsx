@@ -15,49 +15,68 @@ export default function Register({
 
   const [blockchainData,setBlockchainData] = useState(null);
 
-  const handleRegister = async() => {
-    console.log("Register button clicked");
+  const handleRegister = async () => {
 
-   const response = await fetch(
+  console.log("Register button clicked");
+
+  try {
+
+    const response = await fetch(
       "http://127.0.0.1:5000/register",
       {
         method: "POST",
-
         headers: {
           "Content-Type":
-            "application/json"
+          "application/json"
         },
-
         body: JSON.stringify({
-
           studentId,
-
           studentName,
-
           password
-
         })
-
       }
+    );
+
+    console.log(
+      "Response Status:",
+      response.status
     );
 
     const data =
       await response.json();
 
-      console.log(
-        "Registration Response:",
-        data
+    console.log(
+      "Registration Response:",
+      data
+    );
+
+    if (!response.ok) {
+
+      alert(
+        "Registration Failed"
       );
 
-    setBlockchainData(data);  
+      return;
+    }
 
-    console.log(
-      "Blockchain Data:",
-      data);
+    setBlockchainData(data);
 
     alert(
-   "Account Created Successfully!"
-  );
+      "Account Created Successfully!"
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Register Error:",
+      error
+    );
+
+    alert(
+      "Cannot connect to Flask backend"
+    );
+
+  }
 
    //setTimeout(() => {
    //onBack();

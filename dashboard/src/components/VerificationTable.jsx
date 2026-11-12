@@ -39,7 +39,6 @@ export default function VerificationTable({
           <thead>
             <tr>
               <th>Student ID</th>
-              <th>Module</th>
               <th>Status</th>
               <th>Result</th>
             </tr>
@@ -53,8 +52,6 @@ export default function VerificationTable({
         <tr key={index}>
 
           <td>{item.studentId}</td>
-
-          <td>{item.module}</td>
 
           <td>{item.status}</td>
 

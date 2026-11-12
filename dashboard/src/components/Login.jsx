@@ -1,5 +1,4 @@
 import { useState } from "react";
-import users from "../data/users.json";
 
 
 export default function Login({ onLogin, onRegister }) {
@@ -7,28 +6,52 @@ export default function Login({ onLogin, onRegister }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
 
-  const user = users.find(
+  if (!username || !password) {
 
-    u =>
+    alert(
+      "Please enter username and password"
+    );
 
-    u.username === username &&
+    return;
+  }
 
-    u.password === password
+  const response = await fetch(
+    "http://127.0.0.1:5000/login",
+    {
+      method: "POST",
 
+      headers: {
+        "Content-Type":
+        "application/json"
+      },
+
+      body: JSON.stringify({
+
+        username,
+
+        password
+
+      })
+    }
   );
 
-  if(user){
+  const data =
+    await response.json();
 
-    onLogin(user);
+  if (data.success) {
 
-  }
-  else{
+    onLogin(
+      data.user
+    );
+
+  } else {
 
     alert(
       "Invalid Credentials"
     );
+
   }
 
 };
